@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>MyVueApp</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
+        <div id="app-2" v-bind:title="message">
+            Hover your mouse over me for a few seconds to see me dynamically bound title
+        </div>
+        <div id="app-3" v-if="seen">
+            Now you see me.
+        </div>
+        <div id="app-4">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+        <div id='app-5'>
+            <p>
+                {{ message }}
+            </p>
+            <button v-on:click="reverseMessage">Reverse Text</button>
+        </div>
+        <div id="app-6">
+            <p>
+                {{ message }}
+            </p>
+            <input v-model="message">
+        </div>
+        <script>
+            var app= new Vue({
+                el: '#app' ,
+                data: {
+                    message: 'Hello Vue!'
+                }
+            })
+            //in console write app.message="new message" to dynamically update the message
+            var app2=new Vue({
+                el:'#app-2',
+                data:{
+                    message:"You Loaded this page on "+ new Date().toLocaleString()
+                }
+            })
+            //in console app-2.message="new title" to dynamically update title
+            var app3=new Vue({
+                el:"#app-3",
+                data:{
+                    seen:true
+                }
+            })
+            //in console app-3.seen=false
+            var app4=new Vue({
+                el:"#app-4",
+                data:{
+                    todos:[
+                        {text:"Vishal Rana"},
+                        {text:"Harsh Rana"},
+                        {text:"Prashant Rana"},
+                        {text:"Varsha Rana"}                        
+                    ]
+                }
+            })
+            //in console app-4.todos.push({text:"new test"})
+            var app5=new Vue({
+                el:"#app-5",
+                data:{
+                    message:"Vishal Rana"
+                },
+                methods:{
+                    reverseMessage: function(){
+                        this.message=this.message.split('').reverse().join('')
+                    }
+                }
+            })
+            var app6=new Vue({
+                el:"#app-6",
+                data:{
+                    message:"Vishal Rana"
+                }
+            })
+        </script>
+    </body>
+</html>
